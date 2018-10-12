@@ -1,0 +1,151 @@
+package com.example.roshan.quickwriter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.FilterQueryProvider;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    Cursor cursor;
+    ListView notesList;
+    SQLiteDatabase database;
+    DatabaseUtility databaseUtility;
+    MyNoteRecyclerViewAdapter adapter;
+    LinearLayout emptyView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.appToolbar);
+        toolbar.setOverflowIcon(getDrawable(R.drawable.ic_more_vert_24dp));
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        databaseUtility = DatabaseUtility.getInstance(this);
+        database = databaseUtility.getReadableDatabase();
+        cursor = database.rawQuery("SELECT * FROM notes;", null);
+        emptyView = findViewById(R.id.emptyView);
+        showOrHideEmptyView(cursor.getCount());
+        notesList = findViewById(R.id.notesList);
+        adapter =  new MyNoteRecyclerViewAdapter(this, cursor);
+        notesList.setAdapter(adapter);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int noteId = databaseUtility.createNewNote();
+                Intent newNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                newNoteIntent.putExtra("id", noteId);
+                databaseUtility.close();
+                startActivity(newNoteIntent);
+            }
+        });
+        notesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int noteId = Integer.parseInt(view.getTag().toString());
+                Intent viewNoteIntent = new Intent(getApplicationContext(), ViewNoteActivity.class);
+                viewNoteIntent.putExtra("id", noteId);
+                databaseUtility.close();
+                startActivity(viewNoteIntent);
+            }
+        });
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+
+            public Cursor runQuery(CharSequence s) {
+                Cursor cur = database.rawQuery("SELECT * FROM notes WHERE title LIKE ? OR content LIKE ?;", new String[] {"%"+ s.toString()+ "%" });
+                Log.i("FILTER: ", "Filter working, obtained" + cur.getCount());
+
+                return cur;
+            }
+
+        });
+    }
+
+    private void showOrHideEmptyView(int count) {
+        if(count > 0) {
+            emptyView.setVisibility(View.GONE);
+        } else {
+            emptyView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuOptionSettings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+
+            case R.id.menuOptionAbout:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.menuOptionSearch);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                adapter.getFilter().filter(s);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return true;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        database = databaseUtility.getReadableDatabase();
+        cursor = database.rawQuery("SELECT * FROM notes;", null);
+        adapter = new MyNoteRecyclerViewAdapter(this, cursor);
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+
+            public Cursor runQuery(CharSequence s) {
+                Cursor cur = database.rawQuery("SELECT * FROM notes WHERE title LIKE ? OR content LIKE ?;", new String[] {"%"+ s.toString()+ "%", "%"+ s.toString()+ "%" });
+                Log.i("FILTER: ", "Filter working, obtained" + cur.getCount());
+
+                return cur;
+            }
+
+        });
+        notesList.setAdapter(adapter);
+        showOrHideEmptyView(cursor.getCount());
+        super.onResume();
+    }
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/appToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#FFF"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+
+            app:title="Settings"
+            app:titleTextColor="@color/colorPrimaryDark"
+            style="@style/MyToolbarStyle"
+            app:popupTheme="@style/MyToolbarStyle"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customize font"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAllCaps="true"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+            <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fontRadioRobotoSlab"
+            android:text="Roboto Slab"
+            android:textSize="18sp"
+                android:padding="16dp"
+            android:fontFamily="@font/roboto_slab"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fontRadioRoboto"
+                android:text="Roboto"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:fontFamily="sans-serif"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fontRadioMontserrat"
+                android:text="Montserrat"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:fontFamily="@font/montserrat"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:id="@+id/fontRadioPTSerif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pt_serif"
+                android:padding="16dp"
+                android:text="PT Serif"
+                android:textSize="18sp"
+                android:onClick="onRadioButtonClicked"/>
+
+            <RadioButton
+                android:id="@+id/fontRadioOpenSans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:padding="16dp"
+                android:text="Open Sans"
+                android:textSize="18sp"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
