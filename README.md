@@ -5,11 +5,11 @@ A simple, elegant notes app for Android, with focus on simplicity and elegant UI
 You can download the APK here: https://drive.google.com/open?id=1MibuyuCkxtlcAQtrNuZG1wsnd_zPQzB2
 
 ## Features
-> Crisp, simple and straighforward UI
-> Notes are autosaved, you won't lose your progress
-> Customizable fonts to display notes
-> Simple, easy way to share your note as text
-> Search your notes based on title or note content
+. Crisp, simple and straighforward UI
+. Notes are autosaved, you won't lose your progress
+. Customizable fonts to display notes
+. Simple, easy way to share your note as text
+. Search your notes based on title or note content
 
 ## Screenshots
 
