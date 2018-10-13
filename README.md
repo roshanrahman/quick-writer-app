@@ -1,4 +1,4 @@
-# quick-writer-app
+# Quick Writer
 A simple, elegant notes app for Android, with focus on simplicity and elegant UI design.
 
 ## Download APK
