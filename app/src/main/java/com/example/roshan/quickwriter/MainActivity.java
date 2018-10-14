@@ -13,15 +13,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,6 +83,69 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        notesList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        notesList.setItemsCanFocus(false);
+        notesList.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+            @Override
+            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+                View currentItem = (View) notesList.getChildAt(position);
+
+                if(checked) {
+                    currentItem.setBackgroundColor(getResources().getColor(R.color.pressed));
+                } else {
+                    currentItem.setBackgroundColor(getResources().getColor(R.color.defaultColor));
+
+                }
+            }
+
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater menuInflater = mode.getMenuInflater();
+                menuInflater.inflate(R.menu.selected, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menuOptionDelete:
+                        deleteSelectedItems();
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+                for(int i = 0; i < notesList.getCount(); i++) {
+                    notesList.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.defaultColor));
+                }
+            }
+        });
+    }
+
+    private void deleteSelectedItems() {
+        ArrayList<String> selectedIds = new ArrayList<>();
+        SparseBooleanArray checkedItemPositions = notesList.getCheckedItemPositions();
+        for(int i = 0; i < checkedItemPositions.size(); i++) {
+            if(checkedItemPositions.valueAt(i)) {
+                selectedIds.add(notesList.getChildAt(i).getTag().toString());
+            }
+        }
+        databaseUtility.deleteNotes(selectedIds);
+        database = databaseUtility.getReadableDatabase();
+        cursor = database.rawQuery("SELECT * FROM notes;", null);
+        adapter.changeCursor(cursor);
+        showOrHideEmptyView(cursor.getCount());
+        adapter.notifyDataSetChanged();
+
     }
 
     private void showOrHideEmptyView(int count) {

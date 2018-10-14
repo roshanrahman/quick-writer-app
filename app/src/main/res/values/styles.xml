@@ -8,12 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor" tools:targetApi="m">#FFF</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="selectableItemBackground">@color/divider</item>
+
     </style>
 
 
         <style name="MyToolbarStyle" parent="AppTheme">
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textColorSecondary">@color/colorPrimaryDark</item>
+            <item name="windowActionModeOverlay">true</item>
+
         </style>
 
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">

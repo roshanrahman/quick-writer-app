@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class DatabaseUtility extends SQLiteOpenHelper {
     private static DatabaseUtility ourInstance;
 
@@ -105,6 +107,27 @@ public class DatabaseUtility extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         db.delete(NOTES_TABLE, where, whereArgs);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        db.close();
+        return true;
+    }
+
+    public boolean deleteNotes(ArrayList<String> ids) {
+        if(ids.size() == 0) {
+            return false;
+        }
+        String list = "(";
+        for(String item : ids) {
+            list = list + item;
+            if(!item.equals(ids.get(ids.size() - 1)))  {
+                list = list + ", ";
+            }
+        }
+        list = list + ")";
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        db.execSQL("DELETE from notes WHERE _id IN " + list + ";");
         db.setTransactionSuccessful();
         db.endTransaction();
         db.close();
