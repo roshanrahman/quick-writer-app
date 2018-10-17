@@ -20,3 +20,4 @@ You can get the latest release of the APK here: https://github.com/roshanrahman/
 ![Edit Node](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/screen3.png "Edit Note")
 ![Change Font](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/screen4.png "Change Font")
 ![Delete Notes](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/delete.png "Delete Notes")
+![App shortcut](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/shortcut.png "App shortcut")
