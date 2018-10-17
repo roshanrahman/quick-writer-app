@@ -10,6 +10,7 @@ You can download the APK here: https://drive.google.com/open?id=1MibuyuCkxtlcAQt
 - Customizable fonts to display notes
 - Simple, easy way to share your note as text
 - Search your notes based on title or note content
+- Easy to manage your notes, now you can select and delete multiple notes
 
 ## Screenshots
 
