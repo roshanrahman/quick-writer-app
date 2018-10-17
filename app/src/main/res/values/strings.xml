@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Quick Writer</string>
+    <string name="shortLabel">New Note</string>
+    <string name="longLabel">Create a new note</string>
+    <string name="shortcutDisabled">Cannot create new notes</string>
+    <string name="shortcutId">newnote</string>
+
 </resources>

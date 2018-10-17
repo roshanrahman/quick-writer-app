@@ -130,7 +130,6 @@ public class DatabaseUtility extends SQLiteOpenHelper {
         db.execSQL("DELETE from notes WHERE _id IN " + list + ";");
         db.setTransactionSuccessful();
         db.endTransaction();
-        db.close();
         return true;
     }
 

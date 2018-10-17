@@ -1,12 +1,15 @@
 package com.example.roshan.quickwriter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseUtility databaseUtility;
     MyNoteRecyclerViewAdapter adapter;
     LinearLayout emptyView;
+    ArrayList<String> selectedIds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,12 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 View currentItem = (View) notesList.getChildAt(position);
-
                 if(checked) {
                     currentItem.setBackgroundColor(getResources().getColor(R.color.pressed));
+                    Log.i("NOTESAPP: Checked", currentItem.getTag().toString());
+                    selectedIds.add(currentItem.getTag().toString());
                 } else {
                     currentItem.setBackgroundColor(getResources().getColor(R.color.defaultColor));
-
+                    Log.i("NOTESAPP: Unchecked", currentItem.getTag().toString());
+                    selectedIds.remove(currentItem.getTag().toString());
                 }
             }
 
@@ -102,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 MenuInflater menuInflater = mode.getMenuInflater();
                 menuInflater.inflate(R.menu.selected, menu);
+                selectedIds = new ArrayList<>();
                 return true;
             }
 
@@ -114,7 +122,23 @@ public class MainActivity extends AppCompatActivity {
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menuOptionDelete:
-                        deleteSelectedItems();
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Delete selected notes?")
+                                .setMessage("Are you sure you want to permanently delete these notes?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteSelectedItems();
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setCancelable(false)
+                                .create().show();
                         mode.finish();
                         return true;
                     default:
@@ -125,27 +149,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestroyActionMode(ActionMode mode) {
                 for(int i = 0; i < notesList.getCount(); i++) {
-                    notesList.getChildAt(i).setBackgroundColor(getResources().getColor(R.color.defaultColor));
+                    notesList.getChildAt(i).setBackgroundColor(Color.TRANSPARENT);
                 }
             }
         });
     }
 
     private void deleteSelectedItems() {
-        ArrayList<String> selectedIds = new ArrayList<>();
-        SparseBooleanArray checkedItemPositions = notesList.getCheckedItemPositions();
-        for(int i = 0; i < checkedItemPositions.size(); i++) {
-            if(checkedItemPositions.valueAt(i)) {
-                selectedIds.add(notesList.getChildAt(i).getTag().toString());
-            }
-        }
+        Log.i("NOTESAPP: To be deleted: ", selectedIds.toString());
+        database = databaseUtility.getWritableDatabase();
         databaseUtility.deleteNotes(selectedIds);
-        database = databaseUtility.getReadableDatabase();
         cursor = database.rawQuery("SELECT * FROM notes;", null);
         adapter.changeCursor(cursor);
-        showOrHideEmptyView(cursor.getCount());
         adapter.notifyDataSetChanged();
-
+        showOrHideEmptyView(cursor.getCount());
     }
 
     private void showOrHideEmptyView(int count) {

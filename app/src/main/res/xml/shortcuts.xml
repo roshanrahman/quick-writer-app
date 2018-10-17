@@ -1,0 +1,16 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="newnote"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:shortcutShortLabel="@string/shortLabel"
+        android:shortcutLongLabel="@string/longLabel"
+        android:shortcutDisabledMessage="@string/shortcutDisabled">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.roshan.quickwriter"
+            android:targetClass="com.example.roshan.quickwriter.EditNoteActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+</shortcuts>
