@@ -29,6 +29,11 @@ public class ViewNoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(ThemeHelper.isDarkTheme(ViewNoteActivity.this)) {
+            setTheme(R.style.AppThemeDark);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_view_note);
         viewNoteTitle = findViewById(R.id.viewNoteTitle);
         viewNoteContent = findViewById(R.id.viewNoteContent);

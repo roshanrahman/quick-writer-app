@@ -36,6 +36,11 @@ public class EditNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         boolean isNewNote = false;
         super.onCreate(savedInstanceState);
+        if(ThemeHelper.isDarkTheme(EditNoteActivity.this)) {
+            setTheme(R.style.AppThemeDark);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_edit_note);
         editNoteText = findViewById(R.id.noteText);
         editNoteTitle = findViewById(R.id.noteTitle);

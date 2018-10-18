@@ -9,6 +9,11 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(ThemeHelper.isDarkTheme(AboutActivity.this)) {
+            setTheme(R.style.AppThemeDark);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.appToolbar);
         setSupportActionBar(toolbar);

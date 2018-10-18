@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(ThemeHelper.isDarkTheme(MainActivity.this)) {
+            setTheme(R.style.AppThemeDark);
+        } else {
+            setTheme(R.style.AppTheme);
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.appToolbar);
         toolbar.setOverflowIcon(getDrawable(R.drawable.ic_more_vert_24dp));
@@ -95,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 View currentItem = (View) notesList.getChildAt(position);
                 if(checked) {
-                    currentItem.setBackgroundColor(getResources().getColor(R.color.pressed));
+                    if(ThemeHelper.isDarkTheme(MainActivity.this))
+                    currentItem.setBackgroundColor(getResources().getColor(R.color.pressedDark));
+                    else
+                        currentItem.setBackgroundColor(getResources().getColor(R.color.pressed));
                     Log.i("NOTESAPP: Checked", currentItem.getTag().toString());
                     selectedIds.add(currentItem.getTag().toString());
                 } else {

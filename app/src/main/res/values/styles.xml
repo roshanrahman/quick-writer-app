@@ -1,5 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <attr name="toolbarTextColor" format="reference"/>
+    <attr name="toolbarBackgroundColor" format="reference"/>
+
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -10,12 +14,30 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="selectableItemBackground">@color/divider</item>
+        <item name="toolbarBackgroundColor">@color/toolbarBackgroundColor</item>
+        <item name="toolbarTextColor">@color/toolbarTextColor</item>
+
+
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FFF</item>
+        <item name="colorPrimaryDark">#FFF</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="toolbarTextColor">@color/toolbarTextColorDark</item>
+        <item name="toolbarBackgroundColor">@color/toolbarBackgroundColorDark</item>
+        <item name="android:statusBarColor" tools:targetApi="m">#000</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+
 
     </style>
 
 
         <style name="MyToolbarStyle" parent="AppTheme">
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">?attr/toolbarTextColor</item>
         <item name="android:textColorSecondary">@color/colorPrimaryDark</item>
             <item name="windowActionModeOverlay">true</item>
 
@@ -23,6 +45,5 @@
 
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
-        //the rest of your codes...
     </style>
 </resources>
