@@ -2,7 +2,7 @@
 A quick and easy notes app for Android, with focus on simplicity and elegant UI design.
 
 ## Download APK
-You can get the latest release of the APK here: https://github.com/roshanrahman/quick-writer-app/releases/download/v1.0/quick-writer-v1.apk
+You can get the latest release of the APK here: https://github.com/roshanrahman/quick-writer-app/releases/download/v1.1/quick-writer-v1.1.apk
 
 ## Features
 - Crisp, simple and straightforward UI, designed to match the new updated Material aesthetics
