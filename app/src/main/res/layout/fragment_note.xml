@@ -15,7 +15,7 @@ android:layout_margin="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/colorPrimaryDark"
         tools:text="Hello everybody!" />
 
     <TextView

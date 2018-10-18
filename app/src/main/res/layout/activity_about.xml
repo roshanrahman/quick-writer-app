@@ -11,11 +11,11 @@
         android:id="@+id/appToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFF"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="About"
-        app:titleTextColor="@color/colorPrimaryDark"
+        app:titleTextColor="?attr/toolbarTextColor"
+        android:background="?attr/toolbarBackgroundColor"
         style="@style/MyToolbarStyle"
         app:popupTheme="@style/MyToolbarStyle"/>
 
@@ -27,9 +27,8 @@
         android:paddingRight="16dp"
         android:text="Quick Writer"
         android:textAlignment="gravity"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textSize="26sp"
+        android:textColor="?attr/colorPrimaryDark" />
 
     <TextView
         android:layout_width="match_parent"
@@ -37,19 +36,20 @@
         android:paddingLeft="16dp"
         android:paddingTop="8dp"
         android:paddingRight="16dp"
+        android:paddingBottom="16dp"
         android:text="A simple and elegant notes app"
         android:textAlignment="gravity"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="?attr/colorPrimaryDark" />
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="48dp"
+        android:paddingTop="16dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="Developed by Roshan"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="?attr/colorPrimaryDark"
         android:textAlignment="gravity"
          />
     <TextView
@@ -58,11 +58,29 @@
         android:paddingTop="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:paddingBottom="16dp"
         android:text="https://www.github.com/roshanrahman"
         android:textAlignment="gravity"
         android:linksClickable="true"
         android:autoLink="all"
         android:textColor="#000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.1"
+        android:padding="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Added Dark Theme functionality"/>
+
+    </ScrollView>
 
 
 

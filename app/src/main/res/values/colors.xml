@@ -9,8 +9,13 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#000</color>
     <color name="pressed">#e0e0e0</color>
+    <color name="pressedDark">#616161</color>
     <color name="selected">#9e9e9e</color>
-    <color name="defaultColor">#FFF</color>
+    <color name="defaultColor">@android:color/transparent</color>
+    <color name="toolbarBackgroundColor">#FFF</color>
+    <color name="toolbarTextColor">@color/colorPrimaryDark</color>
+    <color name="toolbarTextColorDark">#FFF</color>
+    <color name="toolbarBackgroundColorDark">#424242</color>
 
 
 </resources>

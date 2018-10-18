@@ -11,11 +11,11 @@
         android:id="@+id/appToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFF"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="Edit Note"
-        app:titleTextColor="@color/colorPrimaryDark"
+        app:titleTextColor="?attr/toolbarTextColor"
+        android:background="?attr/toolbarBackgroundColor"
         style="@style/MyToolbarStyle"
         app:popupTheme="@style/MyToolbarStyle"
         app:subtitle=""/>
@@ -42,7 +42,7 @@
                 android:hint="Enter the title here"
                 android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="?attr/colorPrimaryDark"
                 android:textStyle="bold" />
 
             <EditText

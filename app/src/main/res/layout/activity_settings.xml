@@ -13,29 +13,31 @@
             android:id="@+id/appToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#FFF"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-
             app:title="Settings"
-            app:titleTextColor="@color/colorPrimaryDark"
+            app:titleTextColor="?attr/toolbarTextColor"
+            android:background="?attr/toolbarBackgroundColor"
             style="@style/MyToolbarStyle"
             app:popupTheme="@style/MyToolbarStyle"/>
 
     </android.support.design.widget.AppBarLayout>
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Customize font"
-            android:paddingTop="16dp"
+            android:paddingTop="32dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textAllCaps="true"/>
@@ -93,7 +95,46 @@
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Color Theme"
+            android:paddingTop="32dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAllCaps="true"/>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Light"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:id="@+id/colorLight"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:id="@+id/colorDark"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Automatic (based on time of day)"
+            android:textSize="18sp"
+            android:padding="16dp"
+            android:id="@+id/colorAutomatic"
+            android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
+
+    </LinearLayout>
+</ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
