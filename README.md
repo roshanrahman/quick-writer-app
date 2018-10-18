@@ -5,7 +5,8 @@ A quick and easy notes app for Android, with focus on simplicity and elegant UI 
 You can get the latest release of the APK here: https://github.com/roshanrahman/quick-writer-app/releases/download/v1.0/quick-writer-v1.apk
 
 ## Features
-- Crisp, simple and straightforward UI, designed to match the new updated Material aesthetics.
+- Crisp, simple and straightforward UI, designed to match the new updated Material aesthetics
+- __Dark theme__ available. You can switch to a darker mode, for ease of use at night
 - Notes are auto-saved, you won't lose your progress
 - Customizable fonts to display notes
 - Simple, easy way to share your note as text
@@ -19,5 +20,6 @@ You can get the latest release of the APK here: https://github.com/roshanrahman/
 ![View Note](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/screen2.png "View Note")
 ![Edit Node](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/screen3.png "Edit Note")
 ![Change Font](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/screen4.png "Change Font")
+![Dark Theme](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/dark.png "Dark Theme")
 ![Delete Notes](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/delete.png "Delete Notes")
 ![App shortcut](https://github.com/roshanrahman/quick-writer-app/raw/master/assets/shortcut.png "App shortcut")
